@@ -1,7 +1,7 @@
 """
 Protein Sequencing Project
-Name:
-Roll Number:
+Name: Sunitha
+Roll Number: 2021501001
 """
 
 import hw6_protein_tests as test
@@ -17,7 +17,12 @@ Parameters: str
 Returns: str
 '''
 def readFile(filename):
-    return
+    f = open(filename,"r")
+    dna = ""
+    for i in f.read():
+        for j in i.splitlines():
+            dna+=j
+    return dna
 
 
 '''
