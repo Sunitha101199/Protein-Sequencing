@@ -4,6 +4,7 @@ Name: Sunitha
 Roll Number: 2021501001
 """
 
+from os import replace
 import hw6_protein_tests as test
 
 project = "Protein" # don't edit this
@@ -32,7 +33,19 @@ Parameters: str ; int
 Returns: list of strs
 '''
 def dnaToRna(dna, startIndex):
-    return
+    rna = []
+    tempStr = ""
+    for i in range(len(dna)):
+        if i>=startIndex:
+            if dna[i]=="T":
+                tempStr+="U"
+            else:
+                tempStr+=dna[i]
+    for i in range(0,len(tempStr),3):
+        rna.append(tempStr[i:i+3])
+        if tempStr[i:i+3]=="UAA" or tempStr[i:i+3]=="UAG" or tempStr[i:i+3]=="UGA":
+            break
+    return rna
 
 
 '''
