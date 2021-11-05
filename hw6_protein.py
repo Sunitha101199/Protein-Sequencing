@@ -55,8 +55,24 @@ Parameters: str
 Returns: dict mapping strs to strs
 '''
 def makeCodonDictionary(filename):
+    codonToAmino = {}
     import json
-    return
+    f = open(filename)
+    data = json.load(f)
+    for i in data:
+        for j in data[i]:
+            temp = ""
+            if "T" in j:
+                j.replace("T","U")
+                for char in j:
+                    if char=="T":
+                        temp+="U"
+                    else:
+                        temp+=char
+                codonToAmino[temp] = i
+            else:
+                codonToAmino[j]=i
+    return codonToAmino
 
 
 '''
