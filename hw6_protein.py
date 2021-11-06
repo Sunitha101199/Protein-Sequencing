@@ -63,7 +63,6 @@ def makeCodonDictionary(filename):
         for j in data[i]:
             temp = ""
             if "T" in j:
-                j.replace("T","U")
                 for char in j:
                     if char=="T":
                         temp+="U"
@@ -100,7 +99,21 @@ Parameters: str ; str
 Returns: 2D list of strs
 '''
 def synthesizeProteins(dnaFilename, codonFilename):
-    return
+    dna = readFile(dnaFilename)
+    codonToAmino = makeCodonDictionary(codonFilename)
+    proteins = []
+    i=0
+    while i<len(dna):
+        if i>=len(dna):
+            break
+        rna = []
+        if dna[i:i+3]=="ATG":
+            rna = dnaToRna(dna, i)
+            proteins.append(generateProtein(rna, codonToAmino))
+            i += 3*len(rna)
+        else:
+            i+=1
+    return proteins
 
 
 def runWeek1():
