@@ -34,13 +34,7 @@ Returns: list of strs
 '''
 def dnaToRna(dna, startIndex):
     rna = []
-    tempStr = ""
-    for i in range(len(dna)):
-        if i>=startIndex:
-            if dna[i]=="T":
-                tempStr+="U"
-            else:
-                tempStr+=dna[i]
+    tempStr = str(dna[startIndex:]).replace("T","U")
     for i in range(0,len(tempStr),3):
         rna.append(tempStr[i:i+3])
         if tempStr[i:i+3]=="UAA" or tempStr[i:i+3]=="UAG" or tempStr[i:i+3]=="UGA":
