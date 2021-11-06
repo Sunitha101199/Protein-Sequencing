@@ -82,7 +82,15 @@ Parameters: list of strs ; dict mapping strs to strs
 Returns: list of strs
 '''
 def generateProtein(codons, codonD):
-    return
+    aminoAcid = []
+    for i in codons:
+        if i=="AUG" and "Start" not in aminoAcid:
+            aminoAcid.append("Start")
+        elif i=="UAA" or i == "UAG" or i == "UGA":
+            aminoAcid.append("Stop")
+        else:
+            aminoAcid.append(codonD[i])
+    return aminoAcid
 
 
 '''
