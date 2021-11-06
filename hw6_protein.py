@@ -100,6 +100,7 @@ Returns: 2D list of strs
 '''
 def synthesizeProteins(dnaFilename, codonFilename):
     dna = readFile(dnaFilename)
+    # bases, unused, synthesized = len(dna), 0, 0
     codonToAmino = makeCodonDictionary(codonFilename)
     proteins = []
     i=0
@@ -111,8 +112,11 @@ def synthesizeProteins(dnaFilename, codonFilename):
             rna = dnaToRna(dna, i)
             proteins.append(generateProtein(rna, codonToAmino))
             i += 3*len(rna)
+            # synthesized+=1
         else:
+            # unused+=1
             i+=1
+    # print(bases, unused, synthesized)
     return proteins
 
 
