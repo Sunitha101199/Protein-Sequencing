@@ -61,16 +61,9 @@ def makeCodonDictionary(filename):
     data = json.load(f)
     for i in data:
         for j in data[i]:
-            temp = ""
             if "T" in j:
-                for char in j:
-                    if char=="T":
-                        temp+="U"
-                    else:
-                        temp+=char
-                codonToAmino[temp] = i
-            else:
-                codonToAmino[j]=i
+                j = str(j).replace("T","U")
+            codonToAmino[j]=i
     return codonToAmino
 
 
