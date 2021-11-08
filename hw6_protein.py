@@ -148,7 +148,12 @@ Parameters: list of strs
 Returns: dict mapping strs to ints
 '''
 def aminoAcidDictionary(aaList):
-    return
+    aminoAcidFrequency = {}
+    for i in aaList:
+        if i not in aminoAcidFrequency:
+            aminoAcidFrequency[i]=0
+        aminoAcidFrequency[i]+=1
+    return aminoAcidFrequency
 
 
 '''
