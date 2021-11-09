@@ -91,9 +91,7 @@ def synthesizeProteins(dnaFilename, codonFilename):
     codonToAmino = makeCodonDictionary(codonFilename)
     proteins = []
     i=0
-    while i<len(dna):
-        if i>=len(dna):
-            break
+    while i!=len(dna):
         rna = []
         if dna[i:i+3]=="ATG":
             rna = dnaToRna(dna, i)
@@ -163,7 +161,36 @@ Parameters: 2D list of strs ; 2D list of strs ; float
 Returns: 2D list of values
 '''
 def findAminoAcidDifferences(proteinList1, proteinList2, cutoff):
-    return
+    comPro1 = combineProteins(proteinList1)
+    comPro2 = combineProteins(proteinList2)
+    aminoAcidFrequency1 = aminoAcidDictionary(comPro1)
+    aminoAcidFrequency2 = aminoAcidDictionary(comPro2)
+    aminoAcidDifferences = []
+    unique = []
+    for i in comPro1+comPro2:
+        if i not in unique and i!="Start" and i!="Stop":
+            unique.append(i)
+    print(unique)
+    for i in unique:
+        li = []
+        if i in aminoAcidFrequency1 and i not in aminoAcidFrequency2:
+            if abs(aminoAcidFrequency1[i]/len(comPro1))>cutoff:
+                li.append(i)
+                li.append(abs(aminoAcidFrequency1[i]/len(comPro1)))
+                li.append(0)
+        elif i in aminoAcidFrequency2 and i not in aminoAcidFrequency1:
+            if abs(aminoAcidFrequency2[i]/len(comPro2))>cutoff:
+                li.append(i)
+                li.append(0)
+                li.append(abs(aminoAcidFrequency2[i]/len(comPro2)))
+        else:
+            if abs((aminoAcidFrequency1[i]/len(comPro1)) - (aminoAcidFrequency2[i]/len(comPro2)))>cutoff:
+                li.append(i)
+                li.append(abs(aminoAcidFrequency1[i]/len(comPro1)))
+                li.append(abs(aminoAcidFrequency2[i]/len(comPro2)))
+        if len(li)==3:
+            aminoAcidDifferences.append(li)
+    return aminoAcidDifferences
 
 
 '''
