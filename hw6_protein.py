@@ -200,6 +200,13 @@ Parameters: 2D list of strs ; 2D list of values
 Returns: None
 '''
 def displayTextResults(commonalities, differences):
+    print("These are the proteins in two genes with length more than two.")
+    for i in commonalities:
+        if len(i)>2:
+            print("-".join(i[1:len(i)-1]))
+    print("These are the amino acids that occurred at the most different rates.")
+    for i in differences:
+        print(i[0]+":",round(i[1],2),"%","in Sep1, ",round(i[2],2),"% ","in Sep2")
     return
 
 
