@@ -267,7 +267,17 @@ Parameters: list of strs ; list of floats ; str ; list of floats ; str ; [option
 Returns: None
 '''
 def createChart(xLabels, freqList1, label1, freqList2, label2, edgeList=None):
+    import numpy as np
     import matplotlib.pyplot as plt
+
+    X_axis = np.arange(len(xLabels))
+    plt.bar(X_axis-0.2, freqList1, width = 0.4)
+    plt.bar(X_axis+0.2, freqList2, width = 0.4)
+  
+    plt.xticks(X_axis, xLabels)
+    # plt.title()
+    plt.legend([label1,label2])
+    plt.show()
     return
 
 
