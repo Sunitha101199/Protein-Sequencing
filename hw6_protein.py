@@ -170,7 +170,6 @@ def findAminoAcidDifferences(proteinList1, proteinList2, cutoff):
     for i in comPro1+comPro2:
         if i not in unique and i!="Start" and i!="Stop":
             unique.append(i)
-    print(unique)
     for i in unique:
         li = []
         if i in aminoAcidFrequency1 and i not in aminoAcidFrequency2:
@@ -274,7 +273,7 @@ def createChart(xLabels, freqList1, label1, freqList2, label2, edgeList=None):
     plt.bar(X_axis-0.2, freqList1, width = 0.4, edgecolor = edgeList)
     plt.bar(X_axis+0.2, freqList2, width = 0.4, edgecolor = edgeList)
   
-    plt.xticks(X_axis, xLabels)
+    plt.xticks(X_axis, xLabels, rotation = "vertical")
     # plt.title()
     plt.legend([label1,label2])
     plt.show()
@@ -304,6 +303,16 @@ Parameters: no parameters
 Returns: None
 '''
 def runFullProgram():
+    humanProtein = synthesizeProteins("data/human_p53.txt", "data/codon_table.json")
+    elephantProtein = synthesizeProteins("data/elephant_p53.txt", "data/codon_table.json")
+    commonalities = commonProteins(humanProtein, elephantProtein)
+    differences = findAminoAcidDifferences(humanProtein, elephantProtein, 0.005)
+    displayTextResults(commonalities, differences)
+    allAminoAcids = makeAminoAcidLabels(humanProtein, elephantProtein)
+    f1 = setupChartData(allAminoAcids, humanProtein)
+    f2 = setupChartData(allAminoAcids, elephantProtein)
+    edges = makeEdgeList(allAminoAcids, differences)
+    createChart(allAminoAcids, f1, "Human", f2, "Elephant", edgeList=edges)
     return
 
 
