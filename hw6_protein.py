@@ -271,8 +271,8 @@ def createChart(xLabels, freqList1, label1, freqList2, label2, edgeList=None):
     import matplotlib.pyplot as plt
 
     X_axis = np.arange(len(xLabels))
-    plt.bar(X_axis-0.2, freqList1, width = 0.4)
-    plt.bar(X_axis+0.2, freqList2, width = 0.4)
+    plt.bar(X_axis-0.2, freqList1, width = 0.4, edgecolor = edgeList)
+    plt.bar(X_axis+0.2, freqList2, width = 0.4, edgecolor = edgeList)
   
     plt.xticks(X_axis, xLabels)
     # plt.title()
@@ -288,7 +288,13 @@ Parameters: list of strs ; 2D list of values
 Returns: list of strs
 '''
 def makeEdgeList(labels, biggestDiffs):
-    return
+    edgeColor = []
+    for i in range(len(labels)):
+        if labels[i] in [j[0] for j in biggestDiffs]:
+            edgeColor.append("black")
+        else:
+            edgeColor.append("white")
+    return edgeColor
 
 
 '''
